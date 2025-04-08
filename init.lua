@@ -692,7 +692,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        ts_ls = {},
+        -- ts_ls = {},
         --
 
         lua_ls = {
@@ -746,7 +746,21 @@ require('lazy').setup({
       }
     end,
   },
-
+  {
+    'pmizio/typescript-tools.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    opts = {},
+    config = function()
+      require('typescript-tools').setup {
+        settings = {
+          tsserver_plugins = {
+            -- https://github.com/pmizio/typescript-tools.nvim?tab=readme-ov-file#-styled-components-support
+            '@styled/typescript-styled-plugin',
+          },
+        },
+      }
+    end,
+  },
   { -- Autoformat
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
